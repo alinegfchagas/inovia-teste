@@ -1,10 +1,10 @@
-import { IUserDB, UserDB } from "../Models/User";
+import { IUserDB, User } from "../Models/User";
 import { BaseDatabase } from "./BaseDatabase";
 
 export class UserDatabase extends BaseDatabase {
   public static CLIENTS = "Clients";
 
-  public UserDBModel = (user: UserDB): IUserDB => {
+  public UserDBModel = (user: User): IUserDB => {
     const UserDB: IUserDB = {
       id: user.getId(),
       name: user.getName(),
@@ -18,10 +18,11 @@ export class UserDatabase extends BaseDatabase {
     };
     return UserDB;
   };
-  
-  public signUp = async (user: UserDB) => {
-    await BaseDatabase.connection(UserDatabase.CLIENTS).insert({
-      id: user.getId(),
+
+  public signUp = async (user: User) => {
+    await BaseDatabase.connection(UserDatabase.CLIENTS)
+    .insert( 
+    { id: user.getId(),
       name: user.getName(),
       adress: user.getAdress(),
       phone: user.getPhone(),
@@ -29,14 +30,21 @@ export class UserDatabase extends BaseDatabase {
       birth_date: user.getBirthDate(),
       login: user.getLogin(),
       password: user.getPassword(),
-      profile_pic: user.getProfilePic(),
-    });
+      profile_pic: user.getProfilePic()});
   };
 
-//   public login = async (user: UserDB) => {
-//     await BaseDatabase.connection(UserDatabase.CLIENTS).where({
-//       login: user.getLogin(),
-//       password: user.getPassword()
-//     });
-//   };
+  public findUserByEmail = async (email: string) => {
+    const result: IUserDB[] = await BaseDatabase.connection(
+      UserDatabase.CLIENTS
+    ).where({ email });
+    return result[0];
+  };
+
+  public findUserByLogin = async (login: string) => {
+    const result: IUserDB[] = await BaseDatabase.connection(
+      UserDatabase.CLIENTS
+    ).where({ login });
+    return result[0];
+  };
+
 }

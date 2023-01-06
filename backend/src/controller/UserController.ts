@@ -26,7 +26,7 @@ export class UserController{
             if(error instanceof BaseError){
                 return res.status(error.statusCode).send({message:error.message})
             }
-            res.status(500).send({message: "Erro Inesperado"})
+            res.status(400).send({message: "não inseriu no banco"})
         }
     }
     public login = async (req:Request, res:Response) => {
@@ -42,7 +42,7 @@ export class UserController{
              if(error instanceof BaseError){
                 return res.status(error.statusCode).send({message:error.message})
             }
-            res.status(500).send({message: "Erro Inesperado"})
+            res.status(400).send({message: "erro de login"})
         }
     }
 }

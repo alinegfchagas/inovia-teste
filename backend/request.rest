@@ -1,0 +1,27 @@
+-- Active: 1662659335013@@35.226.146.116@3306@freire-aline-chagas
+### 
+POST http://localhost:3003/users/signup
+Content-Type: application/json
+
+{
+    "name": "joão",
+    "adress":"casa da mãe joana",
+    "phone":11123456789,
+    "email": "joao@gmail.com",
+    "birth_date":"1989-05-12",
+    "login":"aline123",
+    "password": "abc123",
+    "profile_pic":"bananinha"
+}
+
+# ###
+# # @name login
+# POST http://localhost:3003/users/localhost:3003/users/signup
+# Content-Type: application/json
+
+# {
+#     "email": "astrodev@gmail.com",
+#     "password": "bananinha"
+# }
+
+

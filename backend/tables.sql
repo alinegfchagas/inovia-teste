@@ -1,14 +1,20 @@
 -- Active: 1662659335013@@35.226.146.116@3306@freire-aline-chagas
+
+DROP TABLE IF EXISTS `Clients`;
+DROP TABLE IF EXISTS `Products`;
+DROP TABLE IF EXISTS `Especifications`;
+DROP TABLE IF EXISTS `Orders`;
+
 CREATE TABLE IF NOT EXISTS Clients(
 id VARCHAR (255) PRIMARY KEY,
 name VARCHAR (255) NOT NULL,
 adress VARCHAR (255) NOT NULL,
 phone VARCHAR (11) NOT NULL,
-email VARCHAR (255) NOT NULL,
+email VARCHAR (255) NOT NULL UNIQUE,
 birth_date DATE NOT NULL,
-login VARCHAR (255) NOT NULL,
+login VARCHAR (255) NOT NULL UNIQUE,
 password VARCHAR (255) NOT NULL,
-profile_pic VARCHAR (255) 
+profile_pic VARCHAR (255) NOT NULL
 );
 
 CREATE TABLE IF NOT EXISTS Products(
@@ -19,16 +25,14 @@ brand VARCHAR (11) NOT NULL,
 product_tax VARCHAR (255) NOT NULL,
 quantity TINYINT,
 product_image VARCHAR (255) NOT NULL, 
-especification VARCHAR (255) NOT NULL
-
+especification VARCHAR (255) NOT NULL UNIQUE
 );
 
-CREATE TABLE IF NOT EXISTS Products_Especifications(
-especification_id VARCHAR (255) NOT NULL,
+CREATE TABLE IF NOT EXISTS Especifications(
 name VARCHAR (255) PRIMARY KEY,
 description VARCHAR (255) NOT NULL,
 value DECIMAL (19,2) NOT NULL,
-FOREIGN KEY (especification_id) REFERENCES Products (especification)
+FOREIGN KEY (name) REFERENCES Products (especification)
 );
 
 CREATE TABLE IF NOT EXISTS Orders(
@@ -42,4 +46,3 @@ order_date DATETIME,
 order_total VARCHAR (255) NOT NULL,
 FOREIGN KEY (client_id) REFERENCES Clients (id)
 )
-

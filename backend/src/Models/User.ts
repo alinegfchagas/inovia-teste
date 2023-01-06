@@ -10,7 +10,8 @@ export interface IUserDB {
   profile_pic: string;
 }
 
-export class UserDB {
+
+export class User {
   constructor(
     private id: string,
     private name: string,
