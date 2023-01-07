@@ -4,24 +4,24 @@ POST http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-    "name": "joão",
+    "name": "dfgasfdgasfgasdf",
     "adress":"casa da mãe joana",
     "phone":11123456789,
-    "email": "joao@gmail.com",
-    "birth_date":"1989-05-12",
-    "login":"aline123",
+    "email": "asdasdasda@gmail.com",
+    "birth_date":"1990-01-01",
+    "login":"asdasdasda",
     "password": "abc123",
     "profile_pic":"bananinha"
 }
 
-# ###
-# # @name login
-# POST http://localhost:3003/users/localhost:3003/users/signup
-# Content-Type: application/json
+##
+# @name login
+POST http://localhost:3003/users/login
+Content-Type: application/json
 
-# {
-#     "email": "astrodev@gmail.com",
-#     "password": "bananinha"
-# }
+{
+    "email": "asdasdasda@gmail.com",
+    "password": "abc123"
+}
 
 

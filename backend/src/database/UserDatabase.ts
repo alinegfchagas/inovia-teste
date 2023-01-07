@@ -31,7 +31,8 @@ export class UserDatabase extends BaseDatabase {
       login: user.getLogin(),
       password: user.getPassword(),
       profile_pic: user.getProfilePic()});
-  };
+     
+  }
 
   public findUserByEmail = async (email: string) => {
     const result: IUserDB[] = await BaseDatabase.connection(

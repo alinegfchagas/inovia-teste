@@ -15,10 +15,17 @@ export class UserBusiness {
   ) {}
 
   public signup = async (input: any) => {
-    const { name, adress, phone, email, birth_date, login, password, profile_pic } = input;
-    const birthDate = new Date(birth_date)
- console.table(input)
- 
+    const {
+      name,
+      adress,
+      phone,
+      email,
+      birth_date,
+      login,
+      password,
+      profile_pic,
+    } = input;
+
     if (typeof name !== "string") {
       throw new ParamsError("Parâmetro 'nome' inválido");
     }
@@ -28,7 +35,7 @@ export class UserBusiness {
         "Parâmetro 'nome' deve conter mais de 3 caracteres"
       );
     }
-    
+
     if (typeof adress !== "string") {
       throw new ParamsError("Parâmetro 'endereço' inválido");
     }
@@ -57,7 +64,7 @@ export class UserBusiness {
       throw new ParamsError("Parâmetro 'email' inválido");
     }
 
-    // if (birthDate !== "Date") {
+    // if (birth_date !== Date) {
     //   throw new ParamsError("Parâmetro 'data de nascimento' inválido");
     // }
 
@@ -70,24 +77,20 @@ export class UserBusiness {
     }
 
     const id = this.generateId.generateId();
-    const hashedPassword = await this.hashManager.hash(password); 
+    const hashedPassword = await this.hashManager.hash(password);
     const user = new User(
       id,
       name,
       adress,
       phone,
       email,
-      birthDate,
+      birth_date,
       login,
-      hashedPassword, 
+      hashedPassword,
       profile_pic
     );
 
-    console.log(user)
-
-  
     await this.userDatabase.signUp(user);
-
     const payload: ITokenPayload = {
       id: user.getId(),
       login: user.getLogin(),
@@ -98,6 +101,7 @@ export class UserBusiness {
       message: "cadastro realizado com sucesso!",
       token,
     };
+  
     return response;
   };
 

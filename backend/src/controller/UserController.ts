@@ -19,6 +19,7 @@ export class UserController{
                 password:req.body.password,
                 profile_pic:req.body.profile_pic
             }
+            
             const response= await this.userBusiness.signup(input)
             res.status(201).send(response)
 
@@ -26,7 +27,7 @@ export class UserController{
             if(error instanceof BaseError){
                 return res.status(error.statusCode).send({message:error.message})
             }
-            res.status(400).send({message: "não inseriu no banco"})
+            res.status(400).send({message: "tá dando erro"})
         }
     }
     public login = async (req:Request, res:Response) => {
