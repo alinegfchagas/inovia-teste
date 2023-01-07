@@ -4,24 +4,33 @@ POST http://localhost:3003/users/signup
 Content-Type: application/json
 
 {
-    "name": "dfgasfdgasfgasdf",
-    "adress":"casa da mãe joana",
+    "name": "cliente1",
+    "adress":"casa da mãe joanvvvva",
     "phone":11123456789,
-    "email": "asdasdasda@gmail.com",
+    "email": "cliente1@gmail.com",
     "birth_date":"1990-01-01",
-    "login":"asdasdasda",
-    "password": "abc123",
+    "login":"cliente1",
+    "password": "qwertyuiop",
     "profile_pic":"bananinha"
 }
 
-##
+###
 # @name login
 POST http://localhost:3003/users/login
 Content-Type: application/json
 
 {
-    "email": "asdasdasda@gmail.com",
-    "password": "abc123"
+    "login": "cliente1",
+    "password": "qwertyuiop"
 }
 
+###
+DELETE http://localhost:3003/users/delete
+Authorization: {{login.response.body.token}}
+Content-Type: application/json
 
+{
+    "login": "cliente1",
+    "password": "qwertyuiop",
+    "email":"cliente1@gmail.com"
+}

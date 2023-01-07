@@ -38,6 +38,8 @@ export class UserDatabase extends BaseDatabase {
     const result: IUserDB[] = await BaseDatabase.connection(
       UserDatabase.CLIENTS
     ).where({ email });
+    
+    
     return result[0];
   };
 
@@ -45,7 +47,18 @@ export class UserDatabase extends BaseDatabase {
     const result: IUserDB[] = await BaseDatabase.connection(
       UserDatabase.CLIENTS
     ).where({ login });
+
     return result[0];
   };
+
+  public deleteUserByLogin = async (login: string) => {
+  await BaseDatabase.connection(
+      UserDatabase.CLIENTS
+    ).delete()
+    .where({ login});
+  
+    return "Deletado com sucesso";
+  };
+
 
 }

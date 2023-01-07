@@ -18,16 +18,15 @@ export class UserController{
                 login:req.body.login,
                 password:req.body.password,
                 profile_pic:req.body.profile_pic
-            }
-            
+            }      
             const response= await this.userBusiness.signup(input)
             res.status(201).send(response)
 
-        } catch (error) {
+        } catch (error:any) {
             if(error instanceof BaseError){
                 return res.status(error.statusCode).send({message:error.message})
             }
-            res.status(400).send({message: "tá dando erro"})
+            res.status(400).send({message:error.message}  )
         }
     }
     public login = async (req:Request, res:Response) => {
@@ -37,13 +36,34 @@ export class UserController{
                 password:req.body.password
             }
             const response = await this.userBusiness.login(input)
-            res.status(201).send(response)
+            res.status(200).send(response)
+
 
         } catch (error) {
              if(error instanceof BaseError){
                 return res.status(error.statusCode).send({message:error.message})
             }
             res.status(400).send({message: "erro de login"})
+        }
+    }
+
+    public deleteUser = async (req:Request, res:Response) => {
+        try {
+            const input ={
+                login:req.body.login,
+                password:req.body.password,
+                email:req.body.email,
+                token: req.headers.authorization as string
+            }
+            const response = await this.userBusiness.deleteUser(input)
+            res.status(200).send(response)
+
+
+        } catch (error) {
+             if(error instanceof BaseError){
+                return res.status(error.statusCode).send({message:error.message})
+            }
+            res.status(400).send({message: "Não foi possível deletar o usuário"})
         }
     }
 }

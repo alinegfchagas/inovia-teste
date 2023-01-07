@@ -1,6 +1,7 @@
 import { UserDatabase } from "../database/UserDatabase";
 import { NotFoundError } from "../errors/NotFoundError";
 import { ParamsError } from "../errors/ParamsError";
+import { UnauthorizedError } from "../errors/UnauthorizedError";
 import { User } from "../Models/User";
 import { Authenticator, ITokenPayload } from "../services/Authenticator";
 import { GenerateId } from "../services/GenerateId";
@@ -101,17 +102,17 @@ export class UserBusiness {
       message: "cadastro realizado com sucesso!",
       token,
     };
-  
+
     return response;
   };
 
   public login = async (input: any) => {
     const { login, password } = input;
-    if (login !== "string") {
+    if (typeof login !== "string") {
       throw new ParamsError("Parâmetro 'login' inválido");
     }
 
-    if (password !== "string") {
+    if (typeof password !== "string") {
       throw new ParamsError("Parâmetro 'password' inválido");
     }
 
@@ -131,5 +132,56 @@ export class UserBusiness {
     if (!userDB) {
       throw new NotFoundError("Usuário não cadastrado!");
     }
+    const payload: ITokenPayload = {
+      id: userDB.id,
+      login: userDB.login,
+    };
+
+    const token = this.authenticator.generateToken(payload);
+    const response = {
+      message: "login realizado com sucesso!",
+      token,
+    };
+
+    return response;
+  };
+
+  deleteUser = async (input: any) => {
+    const { token, login, password, email } = input;
+
+    const payload = this.authenticator.getTokenPayload(token);
+
+    if (!payload) {
+      throw new ParamsError("Insira o token");
+    }
+
+    if (!login) {
+      throw new ParamsError("Insira o login");
+    }
+    if (!password) {
+      throw new ParamsError("Insira a senha");
+    }
+    if (!email) {
+      throw new ParamsError("Insira o email");
+    }
+    if (login !== payload.login) {
+      throw new UnauthorizedError("Não autorizado: login inválido");
+    }
+    const userDB = await this.userDatabase.findUserByLogin(login);
+    if (!userDB) {
+      throw new NotFoundError("Usuário não Encontrado!");
+    }
+    if (email !== userDB.email) {
+      throw new ParamsError("E-mail Inválido");
+    }
+    const senha = await this.hashManager.compareHash(password, userDB.password);
+    console.log(senha);
+
+    if (true !== senha) {
+      throw new ParamsError("Senha Inválida");
+    }
+    const response = await this.userDatabase.deleteUserByLogin(login);
+
+    return response;
   };
 }
