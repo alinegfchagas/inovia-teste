@@ -14,7 +14,7 @@ export class UserDatabase extends BaseDatabase {
       birth_date: user.getBirthDate(),
       login: user.getLogin(),
       password: user.getPassword(),
-      profile_pic: user.getProfilePic(),
+      profile_pic: user.getProfilePic()
     };
     return UserDB;
   };
