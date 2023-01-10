@@ -175,7 +175,7 @@ export class UserBusiness {
       throw new ParamsError("E-mail Inválido");
     }
     const senha = await this.hashManager.compareHash(password, userDB.password);
-    console.log(senha);
+    
 
     if (true !== senha) {
       throw new ParamsError("Senha Inválida");

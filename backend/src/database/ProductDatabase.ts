@@ -26,6 +26,7 @@ export class ProductDatabase extends BaseDatabase {
       product_tax: product.getProductTax(),
       quantity: product.getQuantity(),
       product_image: product.getProductImage(),
+      especification:product.getEspecification()
     });
   };
 
