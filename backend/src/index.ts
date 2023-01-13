@@ -2,6 +2,7 @@ import express, { Express } from "express";
 import cors from "cors";
 import { AddressInfo } from "net";
 import { userRouter } from "./router/UserRouter";
+import { productRouter } from "./router/ProductRouter";
 
 const app: Express = express();
 app.use(express.json());
@@ -17,3 +18,4 @@ const server = app.listen(process.env.PORT || 3003, () => {
 });
 
 app.use("/users", userRouter)
+app.use("/products", productRouter)

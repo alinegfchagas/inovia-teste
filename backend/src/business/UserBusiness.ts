@@ -146,7 +146,7 @@ export class UserBusiness {
     return response;
   };
 
-  deleteUser = async (input: any) => {
+  public deleteUser = async (input: any) => {
     const { token, login, password, email } = input;
 
     const payload = this.authenticator.getTokenPayload(token);
@@ -174,9 +174,9 @@ export class UserBusiness {
     if (email !== userDB.email) {
       throw new ParamsError("E-mail Inválido");
     }
+
     const senha = await this.hashManager.compareHash(password, userDB.password);
     
-
     if (true !== senha) {
       throw new ParamsError("Senha Inválida");
     }

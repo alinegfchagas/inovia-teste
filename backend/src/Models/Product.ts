@@ -6,13 +6,10 @@ export interface IProductDB {
   product_tax: number,
   quantity: number,
   product_image: string,
-  especification:string[]
-}
+  especification:string[],
+  description: string,
+  value: number
 
-export interface ProductEspecification {
-    name: string,
-    description: string,
-    value: number
 }
 
 export class ProductDB {
@@ -24,7 +21,9 @@ export class ProductDB {
     private product_tax:number,
     private quantity:number,
     private product_image:string,
-    private especification:string[]
+    private especification:string[],
+    private description: string,
+    private value:string
   ){}
 
   public getId = () => {
@@ -75,22 +74,6 @@ export class ProductDB {
   public setEspecification = (newEspecification: string[]) => {
     this.especification = newEspecification
   };
-}
-
-export class ProductEspecificationDB {
-  constructor(
- private name: string,
- private description: string,
- private value: number
-  ){}
-  
-  public getName=() =>{
-    return this.name;
-  };
-
-  public setName = (newName: string) => {
-    this.name = newName;
-  };
 
   public getDescription=() =>{
     return this.description;
@@ -104,8 +87,7 @@ export class ProductEspecificationDB {
     return this.value;
   };
 
-  public setValue = (newValue: number) => {
+  public setValue = (newValue: string) => {
     this.value = newValue;
   };
-
 }

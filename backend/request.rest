@@ -34,3 +34,19 @@ Content-Type: application/json
     "password": "qwertyuiop",
     "email":"cliente1@gmail.com"
 }
+
+###
+POST http://localhost:3003/products/insert-product
+Content-Type: application/json
+
+{
+    "name":"bola",
+    "price":"5",
+    "brand":"futebola",
+    "product_tax":"8",
+    "quantity":"100",
+    "product_image":"imagem de bola",
+    "description":"bola. excelente pra chutar na janela do vizinho",
+    "value":"5,00"
+        
+}

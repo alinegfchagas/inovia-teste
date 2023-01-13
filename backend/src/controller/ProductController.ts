@@ -24,7 +24,7 @@ export class ProductController {
         product_image: req.body.product_image,
         especification: inputArray,
       };
-
+      console.log("passou pelo controller", input)
       const response = await this.productBusiness.createProduct(input);
       res.status(201).send(response);
 
