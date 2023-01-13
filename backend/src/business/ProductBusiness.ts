@@ -1,13 +1,11 @@
 import { ProductDatabase } from "../database/ProductDatabase";
 import { ParamsError } from "../errors/ParamsError";
 import { ProductDB } from "../Models/Product";
-// import { Authenticator } from "../services/Authenticator";
 import { GenerateId } from "../services/GenerateId";
 
 export class ProductBusiness{
   constructor(
     private productDatabase:ProductDatabase,
-    // private authenticator:Authenticator,
     private generateID:GenerateId
 
   ){}
@@ -27,9 +25,10 @@ export class ProductBusiness{
     if (typeof brand !== "string") {
         throw new ParamsError("Parâmetro 'marca' inválido");
       }
-    if (typeof description !== "string") {
-        throw new ParamsError("Parâmetro 'descrição' inválido");
-      }
+
+    // if (typeof description !== "string") {
+    //     throw new ParamsError("Parâmetro 'descrição' inválido");
+    //   }
 
     if (typeof product_tax !== "number") {
         throw new ParamsError("Parâmetro 'taxa do produto' inválido");
@@ -38,9 +37,10 @@ export class ProductBusiness{
     if (typeof quantity !== "number") {
         throw new ParamsError("Parâmetro 'quantidade' inválido"); 
       }
-    if (typeof value !== "string") {
-        throw new ParamsError("Parâmetro 'value' inválido"); 
-      }
+
+    // if (typeof value !== "number") {
+    //     throw new ParamsError("Parâmetro 'value' inválido"); 
+    //   }
 
     if (quantity <1) {
         throw new ParamsError("quantidade deve ser superior a 1 item"); 
@@ -58,12 +58,13 @@ export class ProductBusiness{
       // const payload = this.authenticator.getTokenPayload(token)
 
       // if(!payload){
-      //     throw new ParamsError("")
-      // }
-  
+      //     throw new ParamsError("").
+      // }     
+      
+        
   
       const id = this.generateID.generateId()
-      console.log(3, input)
+      
   
       const product = new ProductDB(id,
         name,
@@ -72,9 +73,15 @@ export class ProductBusiness{
         product_tax,
         quantity,
         product_image,
-        especification,
-        description, 
-        value)
+        especification
+        )
+
+      //   const espec =  new EspecificationDB(
+      //     name, description, value
+      //   )
+        
+     
+      //  await this.productDatabase.createEspecificationProduct(espec)
         
       await this.productDatabase.createProduct(product)
       const response = {

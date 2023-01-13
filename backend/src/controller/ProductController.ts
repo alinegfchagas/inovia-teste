@@ -22,17 +22,19 @@ export class ProductController {
         product_tax: req.body.product_tax,
         quantity: req.body.quantity,
         product_image: req.body.product_image,
-        especification: inputArray,
+        description: req.body.description,
+        value: req.body.value,
+        especification: inputArray
       };
-      console.log("passou pelo controller", input)
+      
       const response = await this.productBusiness.createProduct(input);
       res.status(201).send(response);
 
-    } catch (error) {
+    } catch (error:any) {
       if (error instanceof BaseError) {
         return res.status(error.statusCode).send({ message: error.message });
       }
-      res.status(400).send({ message: "Erro inesperado ao criar pedido" });
+      res.status(400).send(error.message||{ message: "Erro inesperado ao criar produto" });
     }
   };
 }

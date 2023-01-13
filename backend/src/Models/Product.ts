@@ -22,8 +22,8 @@ export class ProductDB {
     private quantity:number,
     private product_image:string,
     private especification:string[],
-    private description: string,
-    private value:string
+    // private description: string,
+    // private value:number
   ){}
 
   public getId = () => {
@@ -75,19 +75,19 @@ export class ProductDB {
     this.especification = newEspecification
   };
 
-  public getDescription=() =>{
-    return this.description;
-  };
+  // public getDescription=() =>{
+  //   return this.description;
+  // };
 
-  public setDescription = (newDescription: string) => {
-    this.description = newDescription;
-  };
+  // public setDescription = (newDescription: string) => {
+  //   this.description = newDescription;
+  // };
 
-  public getValue=() =>{
-    return this.value;
-  };
+  // public getValue=() =>{
+  //   return this.value;
+  // };
 
-  public setValue = (newValue: string) => {
-    this.value = newValue;
-  };
+  // public setValue = (newValue: number) => {
+  //   this.value = newValue;
+  // };
 }

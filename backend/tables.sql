@@ -30,8 +30,8 @@ especification VARCHAR (255) NOT NULL UNIQUE
 
 CREATE TABLE IF NOT EXISTS Especifications(
 name VARCHAR (255) PRIMARY KEY,
-description VARCHAR (255),
-value DECIMAL (19,2),
+description VARCHAR (255) NOT NULL,
+value DECIMAL (19,2) NOT NULL,
 FOREIGN KEY (name) REFERENCES Products (especification)
 );
 
